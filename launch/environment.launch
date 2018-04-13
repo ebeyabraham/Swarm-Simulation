@@ -1,0 +1,16 @@
+<launch>
+	
+	<node pkg="stdr_robot" type="robot_handler" name="robot0" args="add $(find swarm-simulation)/robot/simBot.yaml 9 7 1.57" />
+	
+	<node pkg="stdr_robot" type="robot_handler" name="robot1" args="add $(find swarm-simulation)/robot/simBot.yaml 7 5 3.14" />
+	
+	<node pkg="stdr_robot" type="robot_handler" name="robot2" args="add $(find swarm-simulation)/robot/simBot.yaml 7 7 6.28" />
+	
+	<include file="$(find stdr_robot)/launch/robot_manager.launch" />
+	
+	<node pkg="tf" type="static_transform_publisher" name="world2map" args="0 0 0 0 0 0  world map 100" />
+	
+	<node type="stdr_server_node" pkg="stdr_server" name="stdr_server" output="screen" args="$(find stdr_resources)/maps/sparse_obstacles.yaml"/>
+
+	<include file="$(find stdr_gui)/launch/stdr_gui.launch"/>
+</launch>
