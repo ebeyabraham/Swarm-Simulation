@@ -11,13 +11,8 @@ class NavigateMap(Thread):
 		self.botNum = botNum
 		
 	def run(self):
-		res = ''
+		#bot motion
 		rospy.loginfo("bot" + self.botNum + 'started')
-		#rospy.on_shutdown(self.shutdown)
-		#rospy.Subscriber('/robot' + self.botNum + '/laser_' + self.botNum, LaserScan, callback)
-		
-		print('-' + str(res))
-    
 		velTopic = '/robot' + self.botNum + '/cmd_vel'
        
 		self.cmd_vel = rospy.Publisher(velTopic, Twist, queue_size=10)
@@ -25,7 +20,7 @@ class NavigateMap(Thread):
 		r = rospy.Rate(10)
 
 		move_cmd = Twist()
-		move_cmd.linear.x = 0.2
+		move_cmd.linear.x = 0.2		#linear velocity along x
 
 		while not rospy.is_shutdown():
 			move_cmd.angular.z = random.randint(-2,2)
@@ -44,15 +39,15 @@ def main():
 		
 		bots = []
 		
-		for i in range(3):
-			newBot = NavigateMap(str(i))
+		for botNum in range(3):
+			newBot = NavigateMap(str(botNum))
 			bots.append(newBot)
 		
-		for i in range(3):
-			bots[i].start()
+		for botNum in range(3):
+			bots[botNum].start()
 		
-		for i in range(3):
-			bots[i].join()
+		for botNum in range(3):
+			bots[botNum].join()
 		
 	except:
 		rospy.loginfo("Node terminated.")
