@@ -4,7 +4,7 @@
 	
 	<node pkg="stdr_robot" type="robot_handler" name="robot1" args="add $(find swarm-simulation)/robot/simBot.yaml 7 5 3.14" />
 	
-	<node pkg="stdr_robot" type="robot_handler" name="robot2" args="add $(find swarm-simulation)/robot/simBot.yaml 7 7 6.28" />
+	<node pkg="stdr_robot" type="robot_handler" name="robot2" args="add $(find swarm-simulation)/robot/simBot.yaml 10 5 0" />
 	
 	<include file="$(find stdr_robot)/launch/robot_manager.launch" />
 	
